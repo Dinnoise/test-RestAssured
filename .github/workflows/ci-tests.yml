@@ -7,44 +7,53 @@ on:
     branches: [ SDET-2 ]
 
 jobs:
-  test:
-
+  api-tests:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up JDK 17
-        uses: actions/setup-java@v2
-        with:
-          java-version: 17
-          distribution: 'temurin'
+      - name: Checkout проекта с тестами
+        uses: actions/checkout@v4
 
-      - name: Install Chrome
+      - name: Клонирование API-сервиса
+        run: git clone https://github.com/bondarenkokate73/simbirsoft_sdet_project.git api-service
+
+      - name: Создание .env файла
         run: |
-          sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
+          cat <<EOF > api-service/.env
+          POSTGRES_USER=test
+          POSTGRES_PASSWORD=test
+          POSTGRES_DB=test
+          POSTGRES_HOST=postgres
+          POSTGRES_PORT=5432
+          HTTP_PORT=8080
+          LOGGER_FORMAT=json
+          EOF
 
-      - name: Set up ChromeDriver
-        uses: nanasess/setup-chromedriver@v2
+      - name: Запуск API-сервиса через Docker Compose
+        run: |
+          cd api-service
+          docker compose up -d
 
-      - name: Build Java examples with Maven
+      - name: Ожидание запуска API-сервиса
+        run: |
+          echo "Ожидаем http://localhost:8080/api/_/docs/swagger/index.html..."
+          for i in {1..30}; do
+            if curl -s http://localhost:8080/api/_/docs/swagger/index.html | grep -q "Swagger"; then
+              echo "Сервис поднят!"
+              exit 0
+            fi
+            echo "Ожидание..."
+            sleep 3
+          done
+          echo "Сервис не поднялся вовремя" >&2
+          docker compose logs service || true
+          exit 1
+
+      - name: Установка Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Запуск тестов
         run: mvn clean test
-
-      - uses: actions/checkout@v2
-        if: always()
-        with:
-          ref: gh-pages
-          path: gh-pages
-      - uses: simple-elf/allure-report-action@master
-        if: always()
-        with:
-          allure_results: target/allure-results
-          allure_history: allure-history
-          keep_reports: 20
-      - name: Publish Report
-        if: always()
-        uses: peaceiris/actions-gh-pages@v2
-        env:
-          PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PUBLISH_BRANCH: gh-pages
-          PUBLISH_DIR: allure-history
