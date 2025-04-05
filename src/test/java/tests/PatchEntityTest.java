@@ -3,6 +3,7 @@ package tests;
 import helpers.PropertyProvider;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
+import io.qameta.allure.restassured.AllureRestAssured;
 import org.testng.annotations.Test;
 import services.EntityService;
 import static io.restassured.RestAssured.given;
@@ -24,6 +25,7 @@ public class PatchEntityTest extends BaseTest{
                 .updateEntity();
 
         given()
+                .filter(new AllureRestAssured())
                 .spec(requestSpecification)
                 .body(updateRequest)
                 .when()
