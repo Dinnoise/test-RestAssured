@@ -16,17 +16,14 @@ public class EntityService extends Specifications{
     @Step("Создание запроса сущности")
     public static EntityRequest createEntity() {
 
-        var title = "Заголовок сущности";
-        var verified = true;
-
         return EntityRequest.builder()
                 .addition(EntityRequest.Addition.builder()
                         .additional_info("Дополнительные сведения")
                         .additional_number(PropertyProvider.getAdditionalNumber())
                         .build())
                 .important_numbers(PropertyProvider.getImportantNumbers())
-                .title(title)
-                .verified(verified)
+                .title("Заголовок сущности")
+                .verified(true)
                 .build();
     }
 

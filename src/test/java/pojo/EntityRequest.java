@@ -7,15 +7,19 @@ import java.util.List;
 @Data
 @Builder
 public class EntityRequest {
-    private Addition addition;
+    @Builder.Default
+    private Addition addition = Addition.builder().build();
     private List<Integer> important_numbers;
-    private String title;
-    private boolean verified;
+    @Builder.Default
+    private String title = "Заголовок сущности";
+    @Builder.Default
+    private boolean verified = true;
 
     @Data
     @Builder
     public static class Addition {
-        private String additional_info;
+        @Builder.Default
+        private String additional_info = "Дополнительные сведения";
         private Integer additional_number;
     }
 }
