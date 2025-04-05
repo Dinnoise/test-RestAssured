@@ -28,7 +28,9 @@ public class GetAllEntityTest extends BaseTest{
                 .get(PropertyProvider.getProperty("endpoint.getAll"))
                 .then()
                 .statusCode(200)
-                .body("entity.size()", greaterThan(0))
-                .body("entity.id", hasItem(Integer.parseInt(createEntityId)));
+                .body(
+                        "entity.size()", greaterThan(0),
+                "entity.id", hasItem(Integer.parseInt(createEntityId))
+                );
     }
 }

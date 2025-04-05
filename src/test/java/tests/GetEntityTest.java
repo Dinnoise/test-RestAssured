@@ -27,9 +27,11 @@ public class GetEntityTest extends BaseTest
                 .get(PropertyProvider.getProperty("endpoint.get") + createEntityId)
                 .then()
                 .statusCode(200)
-                .body("title", equalTo("Заголовок сущности"))
-                .body("verified", is(true))
-                .body("addition.additional_info", equalTo("Дополнительные сведения"))
-                .body("important_numbers", hasItems(42, 87, 15));
+                .body(
+                        "title", equalTo("Заголовок сущности"),
+                        "verified", is(true),
+                        "addition.additional_info", equalTo("Дополнительные сведения"),
+                        "important_numbers", hasItems(42, 87, 15)
+                );
     }
 }
