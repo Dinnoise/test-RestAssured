@@ -1,0 +1,5 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","2740","Проверить создание сущности и получение её по ID","autoTestRest","Sat Apr 05 20:04:24 GMT 2025","passed","Sat Apr 05 20:04:27 GMT 2025","tests.GetEntityTest","Tests","tests.GetEntityTest","testCreateAndGetEntity"
+"","1836","Проверить создание сущности и ее удаление","autoTestRest","Sat Apr 05 20:04:24 GMT 2025","passed","Sat Apr 05 20:04:26 GMT 2025","tests.CreateAndDeleteEntityTest","Tests","tests.CreateAndDeleteEntityTest","testCreateEntityWithSerialization"
+"","2699","Проверить создание сущности и получить всех сущностей","autoTestRest","Sat Apr 05 20:04:24 GMT 2025","passed","Sat Apr 05 20:04:27 GMT 2025","tests.GetAllEntityTest","Tests","tests.GetAllEntityTest","testCreateAndGetAllEntity"
+"","1855","Проверить создание сущности, обновление сущности и ее дополнений","autoTestRest","Sat Apr 05 20:04:24 GMT 2025","passed","Sat Apr 05 20:04:26 GMT 2025","tests.PatchEntityTest","Tests","tests.PatchEntityTest","testCreateAndPatchEntity"
