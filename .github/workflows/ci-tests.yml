@@ -38,7 +38,7 @@ jobs:
         run: |
           echo "Ожидаем http://localhost:8080/api/_/docs/swagger/index.html..."
           for i in {1..30}; do
-            if curl -s http://localhost:8080/api/_/docs/swagger/index.html | grep -q "Swagger"; then
+            if curl -s http://localhost:8080 | grep -q 'GET'; then
               echo "Сервис поднят!"
               exit 0
             fi
