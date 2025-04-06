@@ -18,12 +18,9 @@ public class EntityService extends Specifications{
 
         return EntityRequest.builder()
                 .addition(EntityRequest.Addition.builder()
-                        .additional_info("Дополнительные сведения")
                         .additional_number(PropertyProvider.getAdditionalNumber())
                         .build())
                 .important_numbers(PropertyProvider.getImportantNumbers())
-                .title("Заголовок сущности")
-                .verified(true)
                 .build();
     }
 

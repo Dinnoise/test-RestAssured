@@ -23,7 +23,6 @@ public class GetEntityTest extends BaseTest
                 .createEntityId(request);
 
         given()
-                .filter(new AllureRestAssured())
                 .spec(requestSpecification)
                 .when()
                 .get(PropertyProvider.getProperty("endpoint.get") + createEntityId)

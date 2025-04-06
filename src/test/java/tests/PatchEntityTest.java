@@ -25,7 +25,6 @@ public class PatchEntityTest extends BaseTest{
                 .updateEntity();
 
         given()
-                .filter(new AllureRestAssured())
                 .spec(requestSpecification)
                 .body(updateRequest)
                 .when()

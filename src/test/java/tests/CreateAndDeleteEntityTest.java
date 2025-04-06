@@ -21,7 +21,6 @@ public class CreateAndDeleteEntityTest extends BaseTest {
                 .createEntity();
 
         var response = given()
-                .filter(new AllureRestAssured())
                 .spec(requestSpecification)
                 .body(request)
                 .when()

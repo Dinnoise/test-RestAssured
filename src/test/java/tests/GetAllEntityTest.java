@@ -24,7 +24,6 @@ public class GetAllEntityTest extends BaseTest{
                 .createEntityId(request);
 
         given()
-                .filter(new AllureRestAssured())
                 .spec(requestSpecification)
                 .when()
                 .get(PropertyProvider.getProperty("endpoint.getAll"))

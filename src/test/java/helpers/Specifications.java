@@ -1,5 +1,6 @@
 package helpers;
 
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
@@ -18,7 +19,8 @@ public class Specifications {
         requestSpecBuilder
                 .setContentType(ContentType.JSON)
                 .setBaseUri(BASE_URL)
-                .setAccept(ContentType.JSON);
+                .setAccept(ContentType.JSON)
+                .addFilter(new AllureRestAssured());
         return requestSpecification = requestSpecBuilder.build();
     }
 }
